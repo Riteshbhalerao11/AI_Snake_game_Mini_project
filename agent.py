@@ -18,9 +18,9 @@ class Agent:
         self.gamma = 0.9 # discount rate
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
         self.model = Linear_QNet(11, 256, 3)
-        # self.model.load_state_dict(torch.load("./model/model.pth"))
+        self.model.load_state_dict(torch.load("./model/model.pth"))
         print(type(self.model))
-        self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
+        # self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
 
     def get_state(self, game):
@@ -88,9 +88,10 @@ class Agent:
 
     def get_action(self, state):
         # random moves: tradeoff exploration / exploitation
-        self.epsilon = 200 - self.n_games
+        self.epsilon = 80 - self.n_games
+        # self.epsilon = 0
         final_move = [0,0,0]
-        if random.randint(0, 400) < self.epsilon:
+        if random.randint(0, 200) < self.epsilon:
             move = random.randint(0, 2)
             final_move[move] = 1
         else:
@@ -121,20 +122,20 @@ def train():
         state_new = agent.get_state(game)
 
         # train short memory
-        agent.train_short_memory(state_old, final_move, reward, state_new, done)
+        # agent.train_short_memory(state_old, final_move, reward, state_new, done)
 
         # remember
-        agent.remember(state_old, final_move, reward, state_new, done)
+        # agent.remember(state_old, final_move, reward, state_new, done)
 
         if done:
             # train long memory, plot result
             game.reset()
             agent.n_games += 1
-            agent.train_long_memory()
+            # agent.train_long_memory()
 
             if score > record:
                 record = score
-                agent.model.save()
+                # agent.model.save()
 
             print('Game', agent.n_games, 'Score', score, 'Record:', record)
 
