@@ -2,9 +2,10 @@
 
 AI Mini project
 
-Demo of the project: !(Demo of Snake Game Agent Learning its environment)[/Demo.mp4]
+## Demo
+https://github.com/Riteshbhalerao11/AI_Snake_game_Mini_project/assets/89914811/02ae2bdc-e346-4234-8a7b-884a073117e1
 
-Team members : 
+## Team members : 
 
 - Ritesh Bhalerao 
 - Atharva Khanvilkar
